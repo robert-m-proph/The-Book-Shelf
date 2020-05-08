@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/practice.css') }}">	
+		<title>The Book Shelf</title>	
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+		</script>
+		<![endif]-->	
+		<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js">
+		</script>
+		<![endif]-->	
+	</head>
+	<body>
+		<!-- HEADER -->
+		<h1>Movie Durations</h1>
+		
+		<!-- Links (Navigation) -->
+
+		<main>
+			<h2>This collection belongs to {{ name }}</h2>
+            
+            <table>
+                <tr>
+                    <th>Movie</th>
+                    <th>Movie Length</th>
+                    <th>Comments</th>
+                </tr>
+
+                {% for movie, length in movies.items() %}
+                    <tr>
+                        <td>{{ movie }}</td>
+                        <td>{{ length }}</td>
+
+                        {% if length < 2 %}
+                            <td>Less than two hours long.</td>
+                        {% elif length >= 2 and length <= 3 %}
+                            <td>Between two and three hours long.</td>
+                        {% else %}
+                            <td class="long">Greater than three hours long.</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+		</main>
+		
+		<!-- FOOTER -->
+	</body>
+</html>
