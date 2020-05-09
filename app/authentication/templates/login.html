@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+
+{% block title %} Sign In {% endblock %}
+
+{% block content %}
+    <div class="container login-msg">
+        <h4> Login Here </h4>
+        <hr>
+        <br>
+        <br>
+        <div> {{ wtf.quick_form(form) }} </div>
+    </div>
+{% endblock content %}

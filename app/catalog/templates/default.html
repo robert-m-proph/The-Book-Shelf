@@ -1,0 +1,82 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/practice.css') }}">	
+		<title>The Book Shelf</title>		
+	</head>
+
+	{% block body %}
+	<body>
+		<div class="wrapper">
+			<!-- Links (Navigation) -->
+			{% block navbar %}
+			<nav class="navbar navbar-inverse">
+				<div class="container">
+					<a class="navbar navbar-text" href="{{ url_for('main.display_books') }}">
+						<h3 class="title">The Book Shelf</h3>
+					</a>
+					<ul class="nav navbar-nav pull-right">
+						<li><a href="{{ url_for('main.display_books') }}">Home</a></li>
+						<li><a href="{{ url_for('authentication.register_user') }}">Register</a></li>
+						<li>
+                        	{% if current_user.is_authenticated %}
+                            	<a href="{{ url_for('authentication.log_out_user') }}"> SignOut </a>
+                        	{% else %}
+                            	<a href="{{ url_for('authentication.sign_in_user') }}"> SignIn </a>
+                        	{% endif %}
+                    	</li>
+                    	<li>
+                        	<a href="">
+                            {%  if current_user.is_authenticated %}
+                                Logged In as <b style="color: deeppink">{{ current_user.user_name.title() }}</b>
+                            {% endif %}
+                        	</a>
+                    	</li>
+					</ul>
+				</div>
+			</nav>
+			{% endblock navbar %}
+
+			<!-- Used for the Flash Messages -->
+			{% for message in get_flashed_messages() %}
+				<div class="container alert alert-info">
+					<button type="button" class="close" data-dismiss="alert"></button>
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<main>
+				{% block content %}
+				<!-- BOOK CONTENT GOES HERE -->
+				{% endblock content %}
+			</main>
+
+			<br><br><br><br><br>
+			<!-- FOOTER -->
+			{% block footer %}
+        	<footer>
+				<div class="container ftr">
+					<hr>
+		   			<div>&copy; 2020 Designed by <a href="mailto:robertpropheter@live.com">Robert Propheter</a></div>
+					<br>
+					<br>		
+					<!-- HTML5 and CSS Validation Buttons -->
+					<a href = "http://validator.w3.org/check?uri=referer" target="_blank">
+						<img style = "border: 0; width: 88px; height: 31px"
+						src ="{{ url_for('static',filename='images/default_html5_validation.png') }}" 
+						alt ="Validate HTML!" /></a> &nbsp;			
+					<a href = "http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
+						<img style = "border: 0; width: 88px; height: 31px"
+						src ="{{ url_for('static',filename='images/default_css_validation.png') }}" 
+						alt = "Validate CSS!" /></a>
+				</div>
+        	</footer>
+			{% endblock footer %}
+		</div>
+	</body>
+	{% endblock body %}
+</html>

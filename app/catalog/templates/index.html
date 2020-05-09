@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+    
+    {% block content %}
+        <div class="container books">
+            <div class="row">
+		        {% for book in books %}
+                    <div class="col-md-3">
+			            <h4>Title: {{ book.title }}</h4>
+			            <p>Author: {{ book.author }}</p>
+			            <p>Format: {{ book.book_format }}</p>
+			            <p>Pages: {{ book.num_pages }}</p>
+			            <p>ISBN: {{ book.isbn }}</p>
+                        <br>
+                    </div>
+		        {% endfor %}
+            </div>
+        </div>
+    {% endblock content %}
+				
